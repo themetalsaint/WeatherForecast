@@ -37,6 +37,14 @@ function getWeather(userSearch){
                 console.log('temp:', temp)
                 $(".tempurature").append(temp) //making the data show up on page
 
+                var sky = data.weather.O //drilling down to get info
+                console.log('sky:', sky)
+                $(".sky").append(sky) //making the data show up on page
+
+                var wind = data.wind.speed //drilling down to get info
+                console.log('wind:', wind)
+                $(".wind").append(wind) //making the data show up on page
+
 
 
 
