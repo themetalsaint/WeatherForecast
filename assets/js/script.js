@@ -1,7 +1,32 @@
 // 1. Build a search bar
 // 2. Need API to pull up weather
 // 3. Save to Local Storage
+var date = moment().format("ll");
+var searchHandler = document.querySelector("#search-form");
+var searchBar = document.querySelector("#search-bar");
+var responseContainer = document.querySelector("#current-result");
+var deleteBtn = $("dlt-btn");
 
+// Current temperature variables
+const cityTempDiv = document.createElement('div');
+const cityDetailsDiv = document.createElement('div');
+var cityNameEl = document.createElement("div");
+var currentTempEl = document.createElement("div");
+var humidityEl = document.createElement("div");
+var windEl = document.createElement("div");
+var uvIndexContainer = document.createElement("div");
+var uvIndexEl = document.createElement("h4");
+var uvValueDisplay = document.createElement("div");
+
+// 5 day forecast variables
+var forecastContainer = document.querySelector("#forecast-result");
+
+var searchWrapperEl = document.querySelector("#search-wrapper");
+var searchHistoryDiv = document.querySelector("#search-history");
+var cityCount = 1;
+
+
+//Main Weather Function
 $(document).ready(function(){
  var submitBtn = $(".btn-info");
  var userInput = $("#search-input");
@@ -43,6 +68,14 @@ $(document).ready(function(){
             localStorage.setItem("history", historyTmp);
           }
 
+          function clearHistory() {
+            var searchedCities = JSON.parse(localStorage.getItem("searchedCities"));
+            for (var i = 0; i < searchedCities.length; i++) {
+                $("city-" + searchedCities[i]).remove();
+            }
+            localStorage.clear("searchedCities");
+        };
+        clearHistory();
     })
 
 function getWeather(userSearch){
@@ -77,14 +110,23 @@ function getWeather(userSearch){
                 $(".wind").append(wind) //making the data show up on page
 
 
-
-
+                
+                
             })
-
+            
         } else{
             alert("Please add an actual city, dummy")
         }
-
+        
+        // remove previously searched weather info
+        var removePrevious = function () {
+            cityNameEl.remove();
+            uvIndexContainer.remove();
+            forecastContainer.innerHTML = "";
+            currentTempEl.remove();
+            humidityEl.remove();
+            windEl.remove();
+        };
 
     }) .catch(function(error){
         console.log("its dead jim")
@@ -92,16 +134,11 @@ function getWeather(userSearch){
 
     
 
-
-
 }
 
 
-  
-
 
 })
-
 
 
 
