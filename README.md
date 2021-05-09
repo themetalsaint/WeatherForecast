@@ -15,3 +15,6 @@ SO THAT I can plan a trip accordingly
 This is the mock up I was aiming for:
 ![The weather app includes a search option, a list of cities, and a five-day forecast and current weather conditions for Atlanta.](./assets/images/06-server-side-apis-homework-demo.png)
 
+
+```
+See it live! -->  https://themetalsaint.github.io/WeatherForecast/

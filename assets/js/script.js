@@ -21,6 +21,27 @@ $(document).ready(function(){
        
         getWeather(userSearch)
 
+        if (localStorage.getItem("history") != null) {
+            var historyTmp = localStorage.getItem("history");
+            var oldhistoryarray = historyTmp.split("|");
+        
+            $("#lastResults").empty();
+        
+            for (var i = 0; i < oldhistoryarray.length; i++) {
+              $("#lastResults").append("<p>" + oldhistoryarray[i] + "</p>");
+            }
+          }
+
+          //Storing result in previous History localstorage
+          if (localStorage.getItem("history") != null) {
+            var historyTmp = localStorage.getItem("history");
+            historyTmp += userSearch;
+            localStorage.setItem("history", historyTmp);
+        
+          } else {
+            var historyTmp = "|";
+            localStorage.setItem("history", historyTmp);
+          }
 
     })
 
@@ -36,6 +57,16 @@ function getWeather(userSearch){
                 var temp = data.main.temp //drilling down to get info
                 console.log('temp:', temp)
                 $(".tempurature").append(temp) //making the data show up on page
+                 
+                //trying to figure out how to convert to F
+
+                // function temperature (temp) {
+                //     valNum = parseFloat(temp);
+                //     document.getElementById("temp").innerHTML = ((temp-273.15)*1.8)+32;
+                //   }
+                //   temperature();
+
+                //   $(".tempurature").append(valNum)
 
                 var sky = data.weather.O //drilling down to get info
                 console.log('sky:', sky)
@@ -66,30 +97,13 @@ function getWeather(userSearch){
 }
 
 
+  
 
 
 })
 
 
 
-// var searchformEl = document.querySelector('#searchForm');
-
-// function handleSearchFormSubmit(event){
-//     event.preventDefault();
-
-//     var searchInputVal = document.querySelector('#search-input').value
-
-//     if (!searchInputVal){
-//         console.error('Please type in a search option');
-        
-        
-//         return;
-//     }
-
-//     var queryString = `./search-results.html?q=${searchInputVal} + &format= + formatInputVal`;
-// }
-
-// searchFormEl.addEventListener('submit', handleSearchFormSubmit);
 
 
 
