@@ -36,15 +36,35 @@
           type="text"
           placeholder="Type here"
         />
+
         <button class="btn-info">Submit</button>
+        
+        <button type="reset" 
+                form="search-form" 
+                id="dlt-btn" 
+                class="btn-danger">
+          <i class="far fa-trash-alt">
+            </i>Clear
+              </button>
       </form>
 
       <div id="lastResults"></div>
 
-      <script type="text/javascript">
-        //To Check and show previous results in **lastResults** div
-        
-      </script>
+      <!-- current forecast section -->
+      <div id="current-result" class="current-style card-body border-secondary">
+         </div>
+        <!-- append current weather here -->
+       
+      <!-- 5 day forecast section -->
+      <section>
+        <!-- will need to make line 50 div a card, line 51 div a card-body and javascript created div a card-body-->
+        <div id="forecast-wrapper" class="forecast-wrap card">
+            <div id="forecast-result" class="forecast-class card-body border-secondary">
+                <!-- append 5 day forecasted weather here -->
+            </div>
+        </div>
+    </section>
+      
     </div>
 
     <div class="container">
