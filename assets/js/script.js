@@ -5,7 +5,6 @@ var date = moment().format("ll");
 var searchHandler = document.querySelector("#search-form");
 var searchBar = document.querySelector("#search-bar");
 var responseContainer = document.querySelector("#current-result");
-var deleteBtn = $("dlt-btn");
 
 // Current temperature variables
 const cityTempDiv = document.createElement('div');
@@ -28,13 +27,19 @@ var cityCount = 1;
 
 //Main Weather Function
 $(document).ready(function(){
- var submitBtn = $(".btn-info");
- var userInput = $("#search-input");
- var apiKey = "723971c9098a844f6ba34be5f5895d70"
+    var submitBtn = $(".btn-info");
+    var deleteBtn = $("dlt-btn");
+    var userInput = $("#search-input");
+    var apiKey = "723971c9098a844f6ba34be5f5895d70"
  
     submitBtn.on("click", function(event){
         event.preventDefault();
-
+        $(".town").empty();
+        $(".icon").empty();
+        $(".sky").empty();
+        $(".wind").empty();
+        $(".tempurature").empty();
+      
         var userSearch = $(userInput).val().trim();
         console.log('userSearch:', userSearch);
 
@@ -58,7 +63,7 @@ $(document).ready(function(){
           }
 
           //Storing result in previous History localstorage
-          if (localStorage.getItem("history") != null) {
+          if (localStorage.getItem("history") !== null && localStorage.getItem("history") !== userSearch) {
             var historyTmp = localStorage.getItem("history");
             historyTmp += userSearch;
             localStorage.setItem("history", historyTmp);
@@ -75,11 +80,49 @@ $(document).ready(function(){
             }
             localStorage.clear("searchedCities");
         };
-        clearHistory();
+        
+        function storeHistory() {
+            // variables to store storage keys for if statements
+            var userSearch = document.querySelector("#search-bar").value.trim().toUpperCase();
+        
+            if (!userSearch) {
+                return;
+            };
+        
+            var previousSearchCity = JSON.parse(localStorage.getItem("searchedCities")) || [];
+            previousSearchCity.push(userSearch);
+            localStorage.setItem("searchedCities", JSON.stringify(previousSearchCity));
+        
+            // clear search bar after clicking search button
+            document.querySelector("#search-bar").value = "";
+        
+            // call function to remove previously searched weather
+            removePrevious();
+        };
+        
+        function loadHistory() {
+            if (localStorage.getItem("searchedCities")) {
+                var previousSearchCity = JSON.parse(localStorage.getItem("searchedCities"));
+                for (var i = 0; i < previousSearchCity.length; i++) {
+                    createBtn(previousSearchCity[i]);
+                }
+            };
+        
+        
+            for (i = 0; i < document.getElementsByClassName("btn").length; i++) {
+                document.getElementsByClassName("btn")[i].addEventListener('click', function () {
+                    var btnClicked = this.getAttribute("data-city");
+                    weatherRequest(btnClicked);
+                    console.log(btnClicked);
+                    removePrevious();
+                });
+            }
+        };
+        
     })
 
 function getWeather(userSearch){
-    var url = `https://api.openweathermap.org/data/2.5/weather?q=${userSearch}&appid=${apiKey}`
+    var url = `https://api.openweathermap.org/data/2.5/weather?q=${userSearch}&appid=${apiKey}&units=imperial`
     console.log('url:', url)
     
     fetch(url).then(function(response){
@@ -89,8 +132,8 @@ function getWeather(userSearch){
                 
                 var temp = data.main.temp //drilling down to get info
                 console.log('temp:', temp)
-                $(".tempurature").append(temp) //making the data show up on page
-                 
+                $(".tempurature").append("The temperature is: " + temp + " F") //making the data show up on page
+              
                 //trying to figure out how to convert to F
 
                 // function temperature (temp) {
@@ -101,16 +144,20 @@ function getWeather(userSearch){
 
                 //   $(".tempurature").append(valNum)
 
-                var sky = data.weather.O //drilling down to get info
+                var sky = data.weather[0].description //drilling down to get info
                 console.log('sky:', sky)
-                $(".sky").append(sky) //making the data show up on page
-
+                $(".sky").append("The sky is: " + sky) //making the data show up on page
+                 
                 var wind = data.wind.speed //drilling down to get info
                 console.log('wind:', wind)
-                $(".wind").append(wind) //making the data show up on page
-
-
+                $(".wind").append("The wind speed is: " + wind + " MPH") //making the data show up on page
                 
+
+                var town = data.name
+                $(".town").append(town)
+
+                var icon = data.weather[0].icon
+                $(".icon").append(`<img src="https://openweathermap.org/img/wn/${icon}@2x.png">`)
                 
             })
             
@@ -135,11 +182,11 @@ function getWeather(userSearch){
     
 
 }
-
+    loadHistory();
+    deleteBtn.addEventListener("click", clearHistory);
 
 
 })
-
 
 
 
