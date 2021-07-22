@@ -27,9 +27,9 @@
     </header>
 
     <!-- Search Section -->
-    <div class="card">
+    <div class="card searchCard">
+      <h3>Search For a City</h3>
       <form class="form-inline" id="searchForm">
-        <h3>Search For a City</h3>
         <input
           id="search-input"
           class="form-input w-10"
@@ -47,28 +47,9 @@
             </i>Clear
               </button>
       </form>
-
-      <div id="lastResults"></div>
-
-      <!-- current forecast section -->
-      <div id="current-result" class="current-style card-body border-secondary">
-         </div>
-        <!-- append current weather here -->
-       
-        <!-- 5 day forecast section -->
-
-    <section>
-        <!-- will need to make line 50 div a card, line 51 div a card-body and javascript created div a card-body-->
-        <div id="forecast-wrapper" class="forecast-wrap card">
-
-        <div id="forecast-result" class="forecast-class card-body border-secondary">
-        
-          <!-- append 5 day forecasted weather here -->
-
-            </div>
-        </div>
-    </section>
-      
+      <h3 class="searchHistory mt-3"></h3>
+      <hr class="toggle">
+      <ul class="mt-1" id="lastResults"></ul>
     </div>
 
     <div class="container" id="weatherBox">
@@ -79,6 +60,25 @@
       <div class="wind"></div>
       <div class="uv"></div>
     </div>
+
+    <div class="fiveDay">
+      <hr>
+        <h2 class="mt-5">Five Day Forecast</h2>
+        <hr>
+        <!-- will need to make line 50 div a card, line 51 div a card-body and javascript created div a card-body-->
+        <div id="forecast-wrapper" class="forecast-wrap"></div>
+          </div>
+        
+        
+          
+
+            
+        
+    
+      
+    
+
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
