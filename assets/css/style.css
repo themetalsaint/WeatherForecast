@@ -27,6 +27,32 @@
 
 }
 
+#lastResults{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+
+}
+
+.link{
+    cursor: pointer;
+    margin: .25vh 0;
+}
+
+.link:hover{
+    color: blue;
+    text-decoration: underline;
+}
+
+#forecast-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+.fiveCard{
+    width: 18vw;
+}
+
 /* Forecast Cards */
 @media screen and (max-width: 1199px) {
     .heading {
