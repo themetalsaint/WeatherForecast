@@ -1,96 +1,162 @@
-
-.forecast-wrap {
-    border: 0;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  overflow: visible;
 }
 
-.forecast-card {
-    margin-right: 5px;
+header {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-image: linear-gradient(to right, rgb(3, 3, 250) , rgb(5, 133, 5));
+}
+header h1 {
     text-align: center;
+    font-weight: bolder;
+    color: white;
 }
 
-.forecast-class {
-    display: flex;
-    justify-content: space-between;
-    background-color: rgb(4, 163, 216);
-    border-radius: .25rem;
+#sidenav {
+    height: 100%;
+    width: 300px;
+    position: fixed; 
+    z-index: 1; 
+    top: 80px; 
+    left: 0;
+    padding-top: 20px;
+    border: 1px solid black;
+  }
+  
+  #sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #918686;
+    display: block;
+  }
+
+#sidenav h2 {
+    margin: 10px;
 }
 
-.forecast-icon {
-    width: 75px;
-    height: 75px;
+  #border {
+    margin-top: 10px;  
+    margin-left: 10px;
+    margin-right: 10px;
+    border-bottom: 2px solid rgb(0, 0, 0);
+  }
+  
+  #sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+#sidenav input {
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-left: 10px;
+    font-size: 17px;
 }
 
-.jumbotron{
-    background-color: rgb(73, 73, 212);
-    text-align: center;
-    color:cornsilk
-
-}
-
-#lastResults{
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-
-}
-
-.link{
+#sidenav .searchContainer button {
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    margin-left: -4px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
     cursor: pointer;
-    margin: .25vh 0;
+  }
+
+  select {
+    margin-left: 10px;
+    margin: 10px;
+    width: 50%;
+    height: 30px;
+  }
+
+
+  #searchContainer input {
+       border: 1px solid grey;
+  }
+
+#weatherContent {
+    margin-top: 100px;
+    margin-left: 300px;
 }
 
-.link:hover{
-    color: blue;
-    text-decoration: underline;
+#weatherContent h3 {
+    margin: 25px;
 }
 
-#forecast-wrapper{
-    display: flex;
+  #currentWeather {
+      margin: 20px;
+      border: 1px solid black;
+      padding: 10px;
+  }
+
+  #weatherCards {
+    display: flex;  
+    flex: auto;
+    flex-flow: row;
     justify-content: space-between;
-}
+    margin: 20px;
+  }
 
-.fiveCard{
-    width: 18vw;
-}
+  .card {
+      border: 1px solid rgba(0, 255, 0, 0.281);
+      width: 15vw;
+      min-height: 30vh;
+      margin-left: 10px;
+      margin-right: 10px;
+      padding: 10px;
+      background-color: rgb(42, 36, 58);
+      color: white;
+  }
 
-/* Forecast Cards */
-@media screen and (max-width: 1199px) {
-    .heading {
-        font-size: 2rem;
+  
+  
+  #pastSearches li {
+    list-style-type: none;
+    padding-left: 0;
+    border-radius: 3px;
+    background-color: rgb(42, 36, 58);
+    margin-bottom: 10px;
+    margin-left: 30px;
+    width: 150px; 
+    text-align: center;
+    color: white;
+    cursor: pointer;
+  }
+  
+  #currentLocation {
+    display: block;
+    margin-left: 10px;
+  }
+  
+  #currentTitle, .Date {
+    display: inline-block;
+    margin-bottom: -15px;
+  }
+  
+  .card img, #currentWeather img {
+    display: inline-block;
+    width: 45px;
+    margin-bottom: -15px;
+  }
+
+  @media screen and (max-width: 950px) {
+    #weatherCards {
+      flex-direction: column;
+      text-align: left;
+      justify-content: center;
     }
-
-    .secondary-text {
-        font-size: 1.5rem;
+    .card {
+      width: 90%;
+      margin-bottom: 10px;
     }
-
-    .forecast-class {
-        flex-direction: column;
-    }
-
-    .forecast-card {
-        margin-bottom: 2px;
-        text-align: center;
-    }
-
-    .forecast-card h5 {
-        font-size: 1.50rem;
-    } 
-
-    .forecast-card h6 {
-        font-size: 1.25rem;
-    }
-}
-
-@media screen and (max-width: 991px) {
-    .search-wrap-style {
-        margin-bottom: 15px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .content-wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
+  }
